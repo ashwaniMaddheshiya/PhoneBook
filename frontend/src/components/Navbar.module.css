@@ -1,0 +1,33 @@
+.container{
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #5D6874;
+    align-items: center;
+    color: white;
+}
+
+.left{
+    margin-left: 1rem;
+}
+
+.container span{
+    font-size: 1.5rem;
+    cursor: pointer;
+    
+}
+
+.customLink{
+    text-decoration: none;
+    color: white;
+}
+
+.right span{
+    margin: 1rem;
+}
+
+.container a:hover,
+.container a:active,
+.container a.active {
+  color: blue;
+}

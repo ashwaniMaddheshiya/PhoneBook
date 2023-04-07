@@ -1,0 +1,14 @@
+.info{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+}

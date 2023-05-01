@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "../components/Forms.module.css";
 import { useParams, useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 
 const UpdateContact = () => {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
+  const [isNumber,setIsNumber] = useState(true);
   const contactId = useParams().contactId;
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +31,14 @@ const UpdateContact = () => {
   };
 
   const contactChangeHandler = (event) => {
-    setContact(event.target.value);
+    const contact = event.target.value;
+    setContact(contact);
+    if(contact.trim().length > 10 || contact.trim().length < 10){
+      setIsNumber(false);
+    }
+    else{
+      setIsNumber(true);
+    }
   };
 
   const submitFormHandler = async (event) => {
@@ -49,7 +58,7 @@ const UpdateContact = () => {
         }
       );
       console.log(response);
-      navigate("/")
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -77,8 +86,11 @@ const UpdateContact = () => {
             value={contact}
           />
         </div>
-        <div className={styles.inputbox}>
+        {/* <div className={styles.inputbox}>
           <input type="button" value="submit" onClick={submitFormHandler} />
+        </div> */}
+        <div>
+          <Button disabled={!name || !isNumber} onClick={submitFormHandler}>Submit</Button>
         </div>
       </form>
     </div>

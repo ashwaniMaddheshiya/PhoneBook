@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import styles from "../components/Forms.module.css";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 
 const AddContact = () => {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
+  const [isNumber, setIsNumber] = useState(false);
+
   const navigate = useNavigate();
 
   const nameChangeHandler = (event) => {
@@ -12,7 +15,14 @@ const AddContact = () => {
   };
 
   const contactChangeHandler = (event) => {
-    setContact(event.target.value);
+    const contact = event.target.value;
+    setContact(contact);
+    if(contact.trim().length > 10 || contact.trim().length < 10){
+      setIsNumber(false);
+    }
+    else{
+      setIsNumber(true);
+    }
   };
 
   const submitFormHandler = async (event) => {
@@ -52,15 +62,18 @@ const AddContact = () => {
         </div>
         <div className={styles.inputbox}>
           <input
-            type="text"
+            type="number"
             required="required"
             placeholder="Contact Number"
             onChange={contactChangeHandler}
             value={contact}
           />
         </div>
-        <div className={styles.inputbox}>
+        {/* <div className={styles.inputbox}>
           <input type="button" value="submit" onClick={submitFormHandler} />
+        </div> */}
+        <div>
+          <Button onClick={submitFormHandler} disabled={!name || !isNumber}>Submit</Button>
         </div>
       </form>
     </div>
